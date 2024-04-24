@@ -34,10 +34,27 @@ class User(UserMixin, Document):
     adult_fname = StringField()
     adult_lname = StringField()
     adult_email = StringField()
+    role = StringField()
+    age = IntField()
     consent = BooleanField(default=False)
-
+    
     meta = {
         'ordering': ['lname','fname']
+    }
+
+class Donation(Document):
+    author = ReferenceField('User',reverse_delete_rule=CASCADE)
+    title = StringField()
+    desciption = StringField()
+    goal = IntField()
+    img = FileField()
+    needed = IntField()
+    given = IntField()
+    create_date = DateTimeField(default=dt.datetime.utcnow)
+    modify_date = DateTimeField()
+
+    meta = {
+        'ordering': ['-createdate']
     }
 
 class Sleep(Document):
