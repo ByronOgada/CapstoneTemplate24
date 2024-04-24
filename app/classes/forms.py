@@ -6,7 +6,7 @@ from flask_wtf import FlaskForm
 import mongoengine.errors
 from wtforms.validators import URL, Email, DataRequired, NumberRange
 from wtforms.fields.html5 import URLField, DateField, IntegerRangeField, EmailField
-from wtforms import StringField, SubmitField, TextAreaField, IntegerField, SelectField, FileField, RadioField
+from wtforms import StringField, SubmitField, TextAreaField, IntegerField, SelectField, FileField, RadioField, FloatField
 from wtforms_components import TimeField
 
 class ProfileForm(FlaskForm):
@@ -14,6 +14,16 @@ class ProfileForm(FlaskForm):
     lname = StringField('Last Name', validators=[DataRequired()]) 
     image = FileField("Image") 
     submit = SubmitField('Post')
+    role = SelectField('Role',choices=[("Teacher","Teacher"),("Student","Student"),("Parent","Parent")])
+    age = IntegerField('Age')
+
+class DonationForm(FlaskForm):
+    author = StringField('What your full name?', validators=[DataRequired()]) 
+    image = FileField("Add an Image") 
+    title = StringField("Title")
+    description = StringField('Description')
+    goal = FloatField("Goal")
+    submit= SubmitField('Post')
 
 class ConsentForm(FlaskForm):
     adult_fname = StringField('First Name',validators=[DataRequired()])
